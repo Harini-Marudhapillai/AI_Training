@@ -1,0 +1,67 @@
+1. Update the patients table for the allergies column. If the patient's allergies is null then replace it with 'NKA'
+
+UPDATE patients
+SET allergies = 'NKA'
+WHERE allergies IS NULL;
+
+2. Show first name and last name concatinated into one column to show their full name.
+
+select concat(first_name,' ',last_name) AS full_name from patients;
+
+3. Show how many patients have a birth_date with 2010 as the birth year.
+
+select count(*) As total_patients 
+from patients
+where year(birth_date)=2010;
+
+4. Show the first_name, last_name, and height of the patient with the greatest height.
+
+select first_name,last_name,max(height) 
+from patients;
+
+5.Show all columns for patients who have one of the following patient_ids:
+1,45,534,879,1000
+
+select *
+from patients
+where patient_id in (1,45,534,879,1000);
+
+6. Show the total number of admissions
+
+select count(*) from admissions;
+
+7. Show all the columns from admissions where the patient was admitted and discharged on the same day.
+
+select * from admissions
+where admission_date=discharge_date;
+
+8. Show the patient id and the total number of admissions for patient_id 579.
+
+select patient_id,count(patient_id) from admissions
+where patient_id=579;
+
+9. Based on the cities that our patients live in, show unique cities that are in province_id 'NS'.
+
+SELECT DISTINCT city
+FROM patients
+WHERE province_id = 'NS';
+
+10. Write a query to find the first_name, last name and birth date of patients who has height greater than 160 and weight greater than 70
+
+SELECT first_name, last_name, birth_date
+FROM patients
+WHERE height > 160 AND weight > 70;
+
+11. Write a query to find list of patients first_name, last_name, and allergies where allergies are not null and are from the city of 'Hamilton'
+
+SELECT first_name, last_name, allergies
+FROM patients
+WHERE allergies IS NOT NULL
+AND city = 'Hamilton';
+
+12. Show unique birth years from patients and order them by ascending.
+
+SELECT
+  DISTINCT YEAR(birth_date) AS birth_year
+FROM patients
+ORDER BY birth_year;
